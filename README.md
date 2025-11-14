@@ -15,16 +15,21 @@ Noa Dufresne
 ##### Images moodboard
 
 <p align="center">
-  <img src="images/moodboard-1.png" width="22%" />
-  <img src="images/moodboard-2.jpg" width="22%" />
-  <img src="images/moodboard-3.png" width="22%" />
-  <img src="images/moodboard-4.avif" width="22%" />
+  <img src="images/moodboard-1.png" style="width:22%; aspect-ratio:1/1; object-fit:cover;" />
+  <img src="images/moodboard-2.jpg" style="width:22%; aspect-ratio:1/1; object-fit:cover;" />
+  <img src="images/moodboard-3.png" style="width:22%; aspect-ratio:1/1; object-fit:cover;" />
+  <img src="images/moodboard-4.avif" style="width:22%; aspect-ratio:1/1; object-fit:cover;" />
 </p>
+
 <p align="center">
-  <img src="images/moodboard-6.jpg" width="22%" />
-  <img src="images/moodboard-7.jpg" width="22%" />
-  <img src="images/moodboard-8.jpg" width="22%" />
+  <img src="images/moodboard-6.jpg" style="width:22%; aspect-ratio:1/1; object-fit:cover;" />
+  <img src="images/moodboard-7.jpg" style="width:22%; aspect-ratio:1/1; object-fit:cover;" />
+  <img src="images/moodboard-8.jpg" style="width:22%; aspect-ratio:1/1; object-fit:cover;" />
+  <img src="images/moodboard-9.jpg" style="width:22%; aspect-ratio:1/1; object-fit:cover;" />
 </p>
+
+
+<br>
 
 ### ✳ Description du projet
 Ce projet est un outil créatif permettant de générer des visuels à partir d’un champ de flux basé sur le bruit de Perlin.
@@ -34,10 +39,10 @@ L’utilisateur peut modifier la densité, la largeur ou les couleurs, et affich
 <br>
 
 ###### Si possible à ajouter:
-✳ Ajout d'un effet de glitch (Pixel Sorting) par dessus les formes générées
-✳ Changer l'épaisseur des lignes
+- Ajout d'un effet de glitch (Pixel Sorting) par dessus les formes générées
+- Changer l'épaisseur des lignes
+- Remplacer les applats de couleurs par des patterns (pointillés, rayures...?)
 <br>
-
 
 ###### Premières idées de réglages UI
 L’outil propose un panneau de contrôle qui permet d’ajuster facilement chaque aspect de la génération visuelle.
@@ -68,6 +73,7 @@ Cela m’a permis de tester visuellement les réglages sans modifier le code à 
 ##### Génération du Perlin noise
 Ce snippet montre comment le bruit de Perlin est utilisé pour créer des directions "random" et organiques dans le champ de flux.
 ![alt text](image-3.png)
+<br>
 
 ##### Génération d’un champ de flux
 ![alt text](image.png)
@@ -76,18 +82,19 @@ Ce snippet montre comment le bruit de Perlin est utilisé pour créer des direct
 Calcule le chemin que suivra chaque ligne en suivant la direction du champ de flux généré par le bruit de Perlin.
 
 ![alt text](image-1.png)
+<br>
 
 ##### Dessiner les lignes
 ![alt text](image-2.png)
+<br>
 
 ##### Créer des formes colorées suivant le flow
 ![alt text](image-4.png)
-
+<br>
 
 ##### Effet de Pixel sorting
 ![alt text](image-5.png)
 [Source de ce snippet de pixel sorting, par Patt Vira]([https://](https://www.youtube.com/watch?v=nNQk9AMYYGk))
-
 <br>
 
 #### Première expérimentations codées en utilisant les snippets
