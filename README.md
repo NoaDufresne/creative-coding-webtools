@@ -7,10 +7,11 @@ Noa Dufresne
 - [nice to have] Effets de glitch (Pixel Sorting)
 
 ##### Références
-- [Oeuvres de Tyler Hobbs]([https://](https://www.lerandom.art/editorial/tyler-hobbs-on-algorithmic-aesthetics))
-- [Perlin Noise Flow Field, The Coding Train]([https://](https://thecodingtrain.com/challenges/24-perlin-noise-flow-field))
-- [Getting Creative with Perlin Noise Fields, sighack]([https://](https://sighack.com/post/getting-creative-with-perlin-noise-fields))
-- [A look into Flow Fields, Medium]([https://](https://haneeen.medium.com/a-look-into-flow-fields-cf4a5663b831))
+- [Oeuvres de Tyler Hobbs](https://www.lerandom.art/editorial/tyler-hobbs-on-algorithmic-aesthetics)
+- [Perlin Noise Flow Field, The Coding Train](https://thecodingtrain.com/challenges/24-perlin-noise-flow-field)
+- [Getting Creative with Perlin Noise Fields, sighack](https://sighack.com/post/getting-creative-with-perlin-noise-fields)
+- [A look into Flow Fields, Medium](https://haneeen.medium.com/a-look-into-flow-fields-cf4a5663b831)
+
   
 ##### Images moodboard
 
@@ -94,7 +95,7 @@ Calcule le chemin que suivra chaque ligne en suivant la direction du champ de fl
 
 ##### Effet de Pixel sorting
 ![alt text](image-5.png)
-[Source de ce snippet de pixel sorting, par Patt Vira]([https://](https://www.youtube.com/watch?v=nNQk9AMYYGk))
+[Source de ce snippet de pixel sorting, par Patt Vira](https://www.youtube.com/watch?v=nNQk9AMYYGk)
 <br>
 
 #### Première expérimentations codées en utilisant les snippets
