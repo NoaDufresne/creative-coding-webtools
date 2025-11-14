@@ -1,7 +1,8 @@
+/* global dat */
 let cols, rows, field;
 let margin = 200;
 let params;
-let baseGraphics;
+let baseGraphics; // store the ribbons and lines here
 
 function setup() {
   createCanvas(800, 800);
@@ -58,7 +59,7 @@ function regenerate() {
   for (let i = 0; i < cols; i++) {
     field[i] = [];
     for (let j = 0; j < rows; j++) {
-      let n = noise(i * 0.05, j * 0.05); 
+      let n = noise(i * 0.08, j * 0.08);
       let angle = map(n, 0, 1, 0, TWO_PI);
       field[i][j] = angle;
     }
@@ -75,7 +76,7 @@ function regenerate() {
   }
 
   if (params.showFlowLines) {
-    baseGraphics.stroke(0, 30);
+    baseGraphics.stroke(0, 20);
     baseGraphics.noFill();
     for (let row of startPoints) {
       for (let p of row) {
@@ -94,6 +95,7 @@ function regenerate() {
   }
 
   image(baseGraphics, 0, 0);
+
   if (params.pixelSort) applyPixelSort();
 }
 
@@ -101,7 +103,6 @@ function drawFlowLine(pg, sx, sy, leftX, topY) {
   let pts = traceFlow(sx, sy, leftX, topY);
   pg.noFill();
   pg.beginShape();
-  pg.curveTightness(0.6);
   for (let v of pts) pg.curveVertex(v.x, v.y);
   pg.endShape();
 }
@@ -119,25 +120,7 @@ function traceFlow(sx, sy, leftX, topY) {
     x += cos(angle) * params.stepLength;
     y += sin(angle) * params.stepLength;
   }
-
-  return smoothPath(points, 4);
-}
-
-function smoothPath(pts, strength = 3) {
-  if (pts.length < 3) return pts;
-  let smoothed = [];
-  for (let i = 1; i < pts.length - 1; i++) {
-    let avgX = 0, avgY = 0;
-    let count = 0;
-    for (let j = -strength; j <= strength; j++) {
-      let k = constrain(i + j, 0, pts.length - 1);
-      avgX += pts[k].x;
-      avgY += pts[k].y;
-      count++;
-    }
-    smoothed.push(createVector(avgX / count, avgY / count));
-  }
-  return smoothed;
+  return points;
 }
 
 function drawSmoothRibbon(pg, startA, startB, leftX, topY) {
@@ -152,7 +135,6 @@ function drawSmoothRibbon(pg, startA, startB, leftX, topY) {
   pg.fill(col);
 
   pg.beginShape();
-  pg.curveTightness(0.5); 
   for (let i = 0; i < n; i++) {
     let t = i / n;
     let taper = sin(t * PI);
@@ -177,6 +159,7 @@ function drawSmoothRibbon(pg, startA, startB, leftX, topY) {
 }
 
 function applyPixelSort() {
+  // only apply on drawn areas (ribbons + flow lines)
   let img = get();
   img.loadPixels();
 
