@@ -60,6 +60,8 @@ L’utilisateur pourra modifier en temps réel :
 
 - La régénération complète du visuel
 
+*ⓘ Pour ajuster rapidement les paramètres lors de mes expérimentations (comme la densité du flow field, la longueur des lignes etc..), j’ai utilisé un petit panneau de contrôle générique via une librairie GUI : `const gui = new dat.GUI();`
+Cela m’a permis de tester visuellement les réglages sans modifier le code à chaque fois.*
 
 ### ✳ Snippets
 
