@@ -1,8 +1,7 @@
-/* global dat */
 let cols, rows, field;
 let margin = 200;
 let params;
-let baseGraphics; // store the ribbons and lines here
+let baseGraphics;
 
 function setup() {
   createCanvas(800, 800);
@@ -11,17 +10,19 @@ function setup() {
   noiseDetail(4, 0.5);
 
   params = {
-    resolution: 25,
-    stepLength: 3,
-    numSteps: 300,
-    ribbonDensity: 0.08,
-    ribbonWidth: 30,
-    showFlowLines: true,
-    pixelSort: false,
-    sortIntensity: 0.3,
-    regenerate: regenerate,
-    applyPixelSort: applyPixelSort
-  };
+  flowScale: 0.03,
+  numSteps: 1000,
+  lineDensity: 0.4,
+  discontinuity: false,
+  showFlowLines: true,
+  showRibbons: true,
+  ribbonDensity: 0.3,
+  ribbonWidth: 22,
+  ribbonOpacity: 50,
+  ribbonColors: ["#2b1a8b", "#962dff", "#f175ff"],
+  bgColor: "#ffffff",
+  pixelSort: { enabled: false, axis: "horizontal", threshold: 50 }
+};
 
   const gui = new dat.GUI();
   gui.width = 260;
@@ -159,7 +160,6 @@ function drawSmoothRibbon(pg, startA, startB, leftX, topY) {
 }
 
 function applyPixelSort() {
-  // only apply on drawn areas (ribbons + flow lines)
   let img = get();
   img.loadPixels();
 

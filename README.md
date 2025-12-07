@@ -1,5 +1,7 @@
 # creative-coding-webtools
 Noa Dufresne
+
+## Rendu 1 - Exploration du sujet et Snippets
 ### ✳ L'idée, en quelques mots
 - Flows de particules (& perlin noise)
 - Formes organiques
@@ -124,4 +126,40 @@ Calcule le chemin que suivra chaque ligne en suivant la direction du champ de fl
 ![Image expérimentation 1](images/screenshot_5.png)
 
 ![Image expérimentation 1](images/screenshot_7.png)
+
+
+## Rendu 2 - Avancement du code / experimentations
+
+A partir de mes premières idées et snippets, j'ai commencé a implémenter toute les fonctionnalités de mon projet en code.
+
+Les snippets de base ont évolués dut a la complexité de certaines fonctionnalité, j'ai également décidé de split mes fichiers javascript en 2: sketch.js (la base du canva), et controls.js qui se focus sur les controles situés dans la side bar.
+
+##### La sidebar
+
+Je me suis penchée sur l'UI de la barre de controle du site ainsi que tous les settings que je voulais y mettre. 
+
+La sidebar contient des sections que l'on peut activer/désactiver, tel que les couleurs et le pixel sorting. (en cliquant sur le [+] ou [-])
+
+J'ai d'abord réalisé une maquette figma de ce menu pour ensuite l'implémenter dans mon projet.
+
+[Lien maquette Figma](https://www.figma.com/design/pki8I9SnUcG0IiVu9puLXb/Creative-Coding---WebTool?node-id=0-1&t=WdJukAWGAjCHhk4r-1)
+
+##### Les fonctionnalités
+
+J'ai ajouté un setting (toggle on/off) permettant de rendre les lignes de flux **"smooth" ou "discontinuous"** (plus angulaires, moins de courbes), et également un toggle pour masquer ou afficher les lignes de flux
+
+J'ai ajouté la fonctionnalité de changer de couleur de **background** (light/dark) via un toggle
+
+Le **pixel sorting** est dersormais fonctionnel, avec une possibilité de changer la direction et le threshold.
+
+J'ai également ajouté la possibilité de personnaliser **les couleurs des formes**, ainsi que leur opacité et densité
+
+Un **bouton d'export** est placé en bas de la sidebar, avec une possibilité de switcher entre un format PNG ou SVG (pour l'instant, seul l'export .png est implémenté).
+
+Images du rendu final:
+
+![Image expérimentation 1](images/1.png)
+![Image expérimentation 1](images/2.png)
+![Image expérimentation 1](images/3.png)
+![Image expérimentation 1](images/4.png)
 
