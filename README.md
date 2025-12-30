@@ -1,3 +1,55 @@
+# Flowform
+
+![Flowform Banner](images/4.png)
+*A generative art tool for creating organic flow field compositions*
+
+---
+
+## About
+
+**Flowform** is an interactive creative coding web tool that generates organic, flowing visual compositions using Perlin noise-based flow fields. Built with p5.js, it combines algorithmic art with an intuitive control interface, allowing artists and designers to create unique generative artwork in real-time.
+
+
+---
+
+## Features
+
+### Flow Field Generation
+- **Perlin Noise-Based Flows**: Organic, natural-looking line patterns driven by multi-octave Perlin noise
+- **Adjustable Flow Scale**: Control the "zoom" level of the noise pattern (0.006–0.06)
+- **Variable Line Density**: From sparse compositions to dense, intricate fields
+- **Customizable Steps**: Control line length and complexity (500–4000 steps)
+- **Line Type Toggle**: Switch between smooth organic curves and angular, discontinuous patterns
+
+### Color & Ribbons
+- **3-Color Palette System**: Fully customizable color pickers with hex input
+- **Per-Color Visibility**: Show/hide individual colors with eye icon toggles
+- **Random Color Generator**: One-click palette randomization
+- **Ribbon Density Control**: Adjust the number of colored shapes (0.01–1.0)
+- **Opacity Control**: Fine-tune transparency (0–100%)
+
+### Visual Effects
+- **Background Options**: Toggle between light and dark backgrounds
+- **Flow Line Visibility**: Show or hide the underlying flow field lines
+- **Pixel Sort Effect**: Glitch-art distortion with adjustable threshold and direction (horizontal/vertical)
+
+### Interface
+- **Resizable Sidebar**: Drag to resize the control panel (180px–720px)
+- **Side Switching**: Move sidebar between left and right edges
+- **Collapsible Sections**: Organize controls into expandable categories
+- **Help Tooltips**: Contextual explanations for each parameter
+
+
+### Export & Utilities
+- **PNG Export**: Save compositions with optional transparent backgrounds
+- **Keyboard Shortcut**: Quick export with `Cmd/Ctrl + S`
+- **Regenerate**: Create new random compositions while keeping settings
+
+---
+
+
+[Archive ReadMe des anciens rendus]
+
 # creative-coding-webtools
 Noa Dufresne
 

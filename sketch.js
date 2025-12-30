@@ -38,6 +38,7 @@ function setup() {
     ribbonWidth: 22,
     ribbonOpacity: 50,
     ribbonColors: ["#3125a1", "#FE582A", "#4534c9"],
+    ribbonEnabled: [true, true, true],
     bgColor: "#ffffff",
     pixelSort: { enabled: false, axis: "horizontal", threshold: 50 }
   };
@@ -46,24 +47,7 @@ function setup() {
   initSliderHandles();
   setupTextToggles();
   setupCollapsibleSections();
-
-  const toggleBtn = document.getElementById("toggle-btn");
-  const openBtn = document.getElementById("open-sidebar-btn");
-  const sidebar = document.getElementById("sidebar");
-
-  if (toggleBtn) toggleBtn.addEventListener("click", () => { sidebar.classList.toggle("collapsed"); updateOpenButtonVisibility(); });
-  if (openBtn) openBtn.addEventListener("click", () => { sidebar.classList.remove("collapsed"); updateOpenButtonVisibility(); });
-
-  updateOpenButtonVisibility();
   regenerate();
-}
-
-// sidebar visibility (to delete?)
-function updateOpenButtonVisibility() {
-  const sidebar = document.getElementById("sidebar");
-  const openBtn = document.getElementById("open-sidebar-btn");
-  if (!sidebar || !openBtn) return;
-  if (sidebar.classList.contains("collapsed")) openBtn.classList.add("show"); else openBtn.classList.remove("show");
 }
 
 function debouncedRibbonUpdate() {
@@ -184,7 +168,10 @@ function traceFlowRaw(sx, sy, leftX, topY, cellSize) {
 function heavySmooth(pts, discontinuityFlag) {
   const n = pts.length;
   const out = [];
-  const w = discontinuityFlag ? 2 : 4;
+  const baseSmoothWindow = discontinuityFlag ? 2 : 4;
+  const densityFactor = map(params.lineDensity, 0.02, 0.6, 1.0, 0.3); // reduce at high density
+  const w = Math.max(1, Math.floor(baseSmoothWindow * densityFactor));
+  
   for (let i = 0; i < n; i++) {
     let ax = 0, ay = 0, cnt = 0;
     for (let j = -w; j <= w; j++) {
@@ -210,7 +197,7 @@ function drawFlowLineFromPts(pg, pts) {
   pg.endShape();
 }
 
-// formesde couleur
+// formes de couleur
 function drawAllRibbons(pg, startPoints, leftX, topY, cellSize) {
   ribbonGrid = new Set();
   if (!startPoints || startPoints.length < 2) return;
@@ -287,9 +274,11 @@ function drawAllRibbons(pg, startPoints, leftX, topY, cellSize) {
 function drawRibbonFromCurves(pg, curveA, curveB) {
   const n = min(curveA.length, curveB.length);
   if (n < 8) return;
+  const palette = params.ribbonColors.filter((c, idx) => !params.ribbonEnabled || params.ribbonEnabled[idx] !== false);
+  if (palette.length === 0) return;
   const alpha = Math.round(constrain(params.ribbonOpacity, 0, 100) * 2.55);
   const opacityHex = alpha.toString(16).padStart(2, '0').toUpperCase();
-  const chosenColor = random(params.ribbonColors);
+  const chosenColor = random(palette);
   pg.fill(chosenColor + opacityHex);
   pg.noStroke();
   pg.curveTightness(0.08);
@@ -326,7 +315,9 @@ function updateRibbonsOnly() {
 }
 function renderComposite() {
   push(); colorMode(RGB, 255); background(params.bgColor); pop();
-  image(baseGraphics, 0, 0); image(ribbonsGraphics, 0, 0);
+  const targetW = width, targetH = height;
+  if (baseGraphics) image(baseGraphics, 0, 0, targetW, targetH);
+  if (ribbonsGraphics) image(ribbonsGraphics, 0, 0, targetW, targetH);
 }
 
 // PIXEL SORT: starts pixel sort
@@ -369,7 +360,7 @@ function pixelSortStep() {
     }
   } catch (err) { console.warn("pixel sort step error:", err); pixelSortDone = true; }
   push(); colorMode(RGB, 255); background(params.bgColor); pop();
-  image(pixelTmp, 0, 0);
+  image(pixelTmp, 0, 0, width, height);
   if (!pixelSortDone) pixelSortAnimationId = requestAnimationFrame(pixelSortStep);
   else { pixelSortRunning = false; pixelSortAnimationId = null; }
 }
@@ -463,7 +454,12 @@ function processSortRow(ctx, y, backingW, backingH) {
 // window resize
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
-  regenerate();
+  if (pixelTmp && (pixelSortRunning || pixelSortDone)) {
+    push(); colorMode(RGB, 255); background(params.bgColor); pop();
+    image(pixelTmp, 0, 0, width, height);
+  } else {
+    renderComposite();
+  }
 }
 
 function redrawBaseGraphics() {
@@ -486,4 +482,22 @@ function redrawBaseGraphics() {
   }
   
   renderComposite();
+}
+
+function exportFlowfield(transparent = false) {
+  if (transparent) {
+    const tempCanvas = createGraphics(width, height);
+    tempCanvas.clear();
+    tempCanvas.image(baseGraphics, 0, 0);
+    tempCanvas.image(ribbonsGraphics, 0, 0);
+    
+    if (params.pixelSort.enabled && pixelTmp) {
+      tempCanvas.image(pixelTmp, 0, 0);
+    }
+    
+    saveCanvas(tempCanvas, 'flowfield-export', 'png');
+    tempCanvas.remove();
+  } else {
+    saveCanvas('flowfield-export', 'png');
+  }
 }
