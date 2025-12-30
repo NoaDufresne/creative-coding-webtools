@@ -3,14 +3,11 @@
 ![Flowform Banner](images/4.png)
 *A generative art tool for creating organic flow field compositions*
 
----
 
 ## About
 
 **Flowform** is an interactive creative coding web tool that generates organic, flowing visual compositions using Perlin noise-based flow fields. Built with p5.js, it combines algorithmic art with an intuitive control interface, allowing artists and designers to create unique generative artwork in real-time.
 
-
----
 
 ## Features
 
